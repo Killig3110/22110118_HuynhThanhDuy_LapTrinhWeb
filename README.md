@@ -1,4 +1,4 @@
-#﻿Bài tập môn Lập trình web
+Bài tập môn Lập trình web
 Họ và tên Huỳnh Thanh Duy
 MSSV: 22110118
 
