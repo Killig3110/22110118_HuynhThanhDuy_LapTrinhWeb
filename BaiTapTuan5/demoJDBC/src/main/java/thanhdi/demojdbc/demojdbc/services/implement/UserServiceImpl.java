@@ -72,12 +72,17 @@ public class UserServiceImpl extends DBConnectMySQL implements IUserServices {
     }
 
     @Override
-    public String getUserByFullName(String fullname) {
+    public UserModel getUserByFullName(String fullname) {
         return usersDao.getUserByFullName(fullname);
     }
 
     @Override
-    public boolean checkUpdateAccount(String username, String images, String fullname, String phone) {
-        return usersDao.checkUpdateAccount(username, images, fullname, phone);
+    public void updateAccount(String username, String fullname, String phone) {
+        usersDao.updateAccount(username, fullname, phone);
+    }
+
+    @Override
+    public void updateFile(String username, String images) {
+        usersDao.updateFile(username, images);
     }
 }

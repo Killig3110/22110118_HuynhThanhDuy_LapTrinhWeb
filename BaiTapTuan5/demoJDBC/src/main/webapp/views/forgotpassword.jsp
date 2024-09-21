@@ -88,17 +88,17 @@
     <div class="container">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
-
+        <br>
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" required>
-
+        <br>
         <label for="new-psw"><b>Password</b></label>
         <input type="password" placeholder="Enter New Password" name="new-password" required>
-
+        <br>
         <label for="re-psw"><b>Confirm Password</b></label>
         <input type="password" placeholder="Repeat Password" name="repeat-password" required>
-
-        <button type="submit">Login</button>
+        <br>
+        <button type="submit">Change</button>
     </div>
 </form>
     </div>

@@ -15,7 +15,7 @@ public interface IUsersDao {
     boolean checkExistEmails(String email);
     boolean checkExistPhones(String phone);
     void updatePassword(String username, String password);
-    int updateAccount(String username, String images, String fullname, String phone);
-    String getUserByFullName(String fullname);
-    boolean checkUpdateAccount(String username, String images, String fullname, String phone);
+    void updateAccount(String username, String fullname, String phone);
+    UserModel getUserByFullName(String fullname);
+    void updateFile(String username, String images);
 }

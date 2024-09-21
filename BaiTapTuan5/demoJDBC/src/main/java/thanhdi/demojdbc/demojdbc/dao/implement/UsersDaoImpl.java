@@ -222,7 +222,7 @@ public class UsersDaoImpl extends DBConnectMySQL implements IUsersDao {
     }
 
     @Override
-    public String getUserByFullName(String fullname) {
+    public UserModel getUserByFullName(String fullname) {
         String sql = "SELECT * FROM users WHERE fullname = ?";
         UserModel user = new UserModel();
         try {
@@ -244,21 +244,19 @@ public class UsersDaoImpl extends DBConnectMySQL implements IUsersDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user.getUsername();
+        return user;
     }
 
     @Override
-    public int updateAccount(String username, String images, String fullname, String phone) {
-        String sql = "UPDATE users SET images = ?, fullname = ?, phone = ? WHERE username = ?";
-        int rowsUpdated = 0; // Biến để lưu số lượng hàng được cập nhật
+    public void updateAccount(String username, String fullname, String phone) {
+        String sql = "UPDATE users SET fullname = ?, phone = ? WHERE username = ?";
         try {
             conn = super.getDatabaseConnection();
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, images);
-            preparedStatement.setString(2, fullname);
-            preparedStatement.setString(3, phone);
-            preparedStatement.setString(4, username);
-            rowsUpdated = preparedStatement.executeUpdate(); // Thực thi câu lệnh update và trả về số lượng dòng được cập nhật;
+            preparedStatement.setString(1, fullname);
+            preparedStatement.setString(2, phone);
+            preparedStatement.setString(3, username);
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -270,20 +268,32 @@ public class UsersDaoImpl extends DBConnectMySQL implements IUsersDao {
                 e.printStackTrace();
             }
         }
-        return rowsUpdated; // Trả về số lượng dòng được cập nhật
     }
 
     @Override
-    public boolean checkUpdateAccount(String username, String images, String fullname, String phone) {
-        // Gọi phương thức updateAccount
-        int result = updateAccount(username, images, fullname, phone);
-
-        // Nếu số dòng bị ảnh hưởng lớn hơn 0, quá trình cập nhật đã thành công
-        return result > 0;
+    public void updateFile(String username, String images) {
+        String sql = "UPDATE users SET images = ? WHERE username = ?";
+        try {
+            conn = super.getDatabaseConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, images);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng kết nối và preparedStatement (bạn cần quản lý tài nguyên đúng cách)
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
         UsersDaoImpl usersDao = new UsersDaoImpl();
-        usersDao.updateAccount("ThanhDi", "images", "fullname", "phone");
+        usersDao.updateAccount("ThanhDi", "fullname", "phone");
     }
 }

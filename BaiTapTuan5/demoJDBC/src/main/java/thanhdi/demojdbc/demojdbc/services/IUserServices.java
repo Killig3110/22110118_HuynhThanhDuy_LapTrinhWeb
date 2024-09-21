@@ -11,7 +11,8 @@ public interface IUserServices {
     boolean checkExistEmail(String email);
     boolean checkExistPhone(String phone);
     void updatePassword(String username, String password);
-    String getUserByFullName(String fullname);
-    boolean checkUpdateAccount(String username, String images, String fullname, String phone);
+    UserModel getUserByFullName(String fullname);
+    void updateAccount(String username, String fullname, String phone);
+    void updateFile(String username, String images);
 
 }

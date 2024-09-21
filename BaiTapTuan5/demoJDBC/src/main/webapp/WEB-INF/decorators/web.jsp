@@ -128,7 +128,7 @@
                         <c:otherwise>
                             <div class="col-sm-6">
                                 <ul class="list-inline right-topbar pull-right">
-                                    <li><a href="${pageContext.request.contextPath}/profile">${sessionScope.account.fullname}</a> | <a
+                                    <li><a href="${pageContext.request.contextPath}/updateaccount">${sessionScope.account.fullname}</a> | <a
                                             href="${pageContext.request.contextPath }/logout">Đăng Xuất</a>
                                     </li>
                                     <li><i class="search fa fa-search search-button"></i></li>

@@ -7,33 +7,77 @@
 
 <body>
 <form action="/updateaccount" method="post" enctype="multipart/form-data">
-    <div class="container">
-        <h1>Register</h1>
-        <p>Please fill in this form to update an account.</p>
-        <hr>
-
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" id="username" value="${username}" readonly required>
-
-        <br>
-
-        <label for="fullname"><b>Fullname</b></label>
-        <input type="text" placeholder="Enter Fullname" name="fullname" id="fullname" required>
-
-        <br>
-
-        <label for="phone"><b>Phone</b></label>
-        <input type="text" placeholder="Enter Phone" name="phone" id="phone" required>
-
-        <br>
-
-        <label for="images"><b>Images</b></label>
-        <input type="file" placeholder="Enter Image" name="multiPartServlet" id="images" required>
-
-        <br>
-
-        <button type="submit" class="updatebtn">Update</button>
+    <div class="main">
+        <div class="container">
+            <div class="col-md-12 col-sm-12">
+                <h1>My account</h1>
+                <div class="content-form-page">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7">
+                            <form action="/profile" method="post" class="form-horizontal" role="form">
+                                <fieldset>
+                                    <legend>Your personal details</legend>
+                                    <div class="form-group">
+                                        <label for="username" class="col-lg-4 control-label">Username <span
+                                                class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" value="${username}" id="username"
+                                                   name="username" readonly required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-lg-4 control-label">Fullname <span
+                                                class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" value="${fullname}" id="fullname"
+                                                   name="fullname" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="col-lg-4 control-label">Phone <span
+                                                class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" value="${phone}" id="phone"
+                                                   name="phone" required>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5 col-sm-5 pull-right">
+                            <div class="form-info">
+                                <h2><em>Upload</em> Avatar</h2>
+                                <form action="/uploadfile" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="file" class="col-lg-4 control-label">Choose file <span
+                                                class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="file" class="form-control" name="file" id="file" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <c:if test="${not empty message}">
+                                    <div class="alert alert-info">${message}</div>
+                                </c:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    </br>
 </form>
 
 </body>

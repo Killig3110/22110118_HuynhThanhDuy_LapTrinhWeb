@@ -32,7 +32,4 @@ INSERT INTO `roles`(`roleid`, `rolename`)
 VALUES (2, 'User');
 
 INSERT INTO `users`(`username`, `password`, `images`, `fullname`, `email`, `phone`, `roleid`, `createDate`) 
-VALUES ('thanhdi', '1234', 'null', 'Huynh Thanh Duy', 'thanhdi@gmail.com', '0325845489', 1, '2024-09-15');
-
-INSERT INTO `users`(`username`, `password`, `images`, `fullname`, `email`, `phone`, `roleid`, `createDate`) 
-VALUES ('huhu', '1234', 'null', 'Khoc thet cung lap trinh WEB', 'huhu@gmail.com', '1234567890', 2, '2024-09-20');
+VALUES ('ThanhDi', '1234', 'null', 'Huynh Thanh Duy', 'thanhdi@gmail.com', '0325845489', 1, '2024-09-15');
