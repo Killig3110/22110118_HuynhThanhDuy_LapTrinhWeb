@@ -20,7 +20,7 @@ import static thanhdi.demojdbc.demojdbc.controllers.UploadFileController.UPLOAD_
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadFileController extends HttpServlet {
-    public static final String UPLOAD_DIRECTORY = "D:\\Lap_trinh_Web\\demoJDBC\\upload";
+    public static final String UPLOAD_DIRECTORY = "D:\\Lap_trinh_Web\\Bai_tap_lap_trinh_web\\BaiTapTuan5\\demoJDBC\\upload";
     private static final long serialVersionUID = 1L;
     public static final String DEFAULT_FILENAME = "default.file";
     public static final String UPDATEFILE = "/views/updateaccount.jsp";
