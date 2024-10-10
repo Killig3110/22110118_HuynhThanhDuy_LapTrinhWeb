@@ -35,8 +35,8 @@
       <td><img height="150" width="200" src="${imgUrl}" /></td>
       <td>${cate.categoryname}</td>
       <td>${cate.status}</td>
-      <td><a href="<c:url value='/admin/category/edit?id=${cate.categoryid}'/>">Sửa</a>
-        | <a href="<c:url value='/admin/category/delete?id=${cate.categoryid}'/>" >Xóa</a>
+      <td><a href="<c:url value='/admin/category/edit?id=${cate.categoryId}'/>">Sửa</a>
+        | <a href="<c:url value='/admin/category/delete?id=${cate.categoryId}'/>" >Xóa</a>
       </td>
     </tr>
   </c:forEach>

@@ -49,10 +49,10 @@ public class UpdateAccountController extends HttpServlet{
                             "Username: " + user.getUsername() + ",\n" +
                             "Fullname: " + user.getFullname() + ",\n" +
                             "Phone: " + user.getPhone() + ",\n" +
-                            "Images: " + user.getImages());
+                            "Images: " + user.getImage());
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("message", "Có lỗi xảy ra!");
+            request.setAttribute("message", e.toString());
         }
         response.sendRedirect(request.getContextPath() + "/updateaccount?message=" + URLEncoder.encode((String) request.getAttribute("message"), "UTF-8"));
 

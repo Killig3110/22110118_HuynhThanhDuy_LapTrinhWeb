@@ -57,11 +57,11 @@ public class CategoryController extends HttpServlet {
 
         if (url.contains("/admin/category/update")) {
             Category category = new Category();
-            category.setCategoryId(Integer.parseInt(req.getParameter("categoryid")));
+            category.setCategoryid(Integer.parseInt(req.getParameter("categoryid")));
             category.setCategoryname(req.getParameter("categoryname"));
 
             // Save old image
-            Category cateOld = categoryServices.findById(category.getCategoryId());
+            Category cateOld = categoryServices.findById(category.getCategoryid());
             String oldImage = cateOld.getImages();
             // process image
             String uplaoadPath = DIR;

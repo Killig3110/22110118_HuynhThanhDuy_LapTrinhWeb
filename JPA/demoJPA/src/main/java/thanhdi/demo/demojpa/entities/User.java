@@ -4,108 +4,61 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "users")
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="UserId")
-    private int userId;
-    @Column(name="Username", columnDefinition = "NVARCHAR(50) NOT NULL")
+    @Column(name = "id", columnDefinition = "INT", nullable = false)
+    private int id;
+
+    @Column(name = "username", columnDefinition = "NVARCHAR(255)", nullable = false)
     private String username;
-    @Column(name="Password", columnDefinition = "NVARCHAR(50) NOT NULL")
+
+    @Column(name = "password", columnDefinition = "VARCHAR(255)", nullable = false)
     private String password;
-    @Column(name="Images", columnDefinition = "NVARCHAR(500) NULL")
-    private String images;
-    @Column(name="Fullname", columnDefinition = "NVARCHAR(200) NOT NULL")
-    private String fullname;
-    @Column(name="Email", columnDefinition = "NVARCHAR(200) NOT NULL")
+
+    @Column(name = "email", columnDefinition = "NVARCHAR(255)", nullable = false)
+    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Email should not be empty")
     private String email;
-    @Column(name="Phone", columnDefinition = "NVARCHAR(20) NULL")
+
+    @Column(name = "roleid", nullable = false)
+    private int roleid;
+
+    @Column(name = "fullname", length = 100, nullable = true)
+    private String fullname;
+
+    @Column(name = "phone", length = 10, nullable = false)
+    @Pattern(regexp = "^\\d{8,10}$", message = "Phone should be valid from 8 to 10 digits")
+    @NotEmpty(message = "Phone should not be empty")
     private String phone;
-    @Column(name="RoleId")
-    private int roleId;
-    @Column(name="CreateDate")
-    private String createDate;
-    //bi-directional many-to-one association to Role
-    @ManyToOne
-    @JoinColumn(name="RoleId", insertable = false, updatable = false)
-    private Role role;
-    public User() {
-    }
-    public User(String username, String password, String images, String fullname, String email, String phone, int roleId, String createDate) {
+
+    @Column(name = "image", length = 1000, nullable = true)
+    private String image;
+
+    @Column(name = "createdDate", length = 10, nullable = true)
+    private String createdDate;
+
+    public User(String username, String password, String image, String fullname, String email, String phone, int roleid, String createdDate) {
         this.username = username;
         this.password = password;
-        this.images = images;
+        this.image = image;
         this.fullname = fullname;
         this.email = email;
         this.phone = phone;
-        this.roleId = roleId;
-        this.createDate = createDate;
-    }
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getImages() {
-        return images;
-    }
-    public void setImages(String images) {
-        this.images = images;
-    }
-    public String getFullname() {
-        return fullname;
-    }
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    public int getRoleId() {
-        return roleId;
-    }
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-    public String getCreateDate() {
-        return createDate;
-    }
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
+        this.roleid = roleid;
 
-    public Role getRole() {
-        return role;
     }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
 }

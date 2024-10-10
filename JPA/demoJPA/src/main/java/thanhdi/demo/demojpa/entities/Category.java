@@ -4,52 +4,36 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "categories")
 @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
-public class Category implements Serializable{
+public class Category implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="CategoryId")
-    private int categoryId;
-    @Column(name="Categoryname", columnDefinition = "NVARCHAR(200) NOT NULL")
+    @Column(name = "categoryId")
+    private int categoryid;
+
+    @Column(name = "categoryname", columnDefinition = "NVARCHAR(255)")
     private String categoryname;
-    @Column(name="Images", columnDefinition = "NVARCHAR(500) NULL")
+
+    @Column(name = "images", columnDefinition = "NVARCHAR(500)")
     private String images;
-    @Column(name="Status")
+
+    @Column(name = "status")
     private int status;
 
-    public Category() {
-    }
+    // Default constructor
     public Category(String categoryname, String images, int status) {
         this.categoryname = categoryname;
         this.images = images;
-        this.status = status;
-    }
-    public int getCategoryId() {
-        return categoryId;
-    }
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-    public String getCategoryname() {
-        return categoryname;
-    }
-
-    public void setCategoryname(String categoryname) {
-        this.categoryname = categoryname;
-    }
-    public String getImages() {
-        return images;
-    }
-    public void setImages(String images) {
-        this.images = images;
-    }
-    public int getStatus() {
-        return status;
-    }
-    public void setStatus(int status) {
         this.status = status;
     }
 }

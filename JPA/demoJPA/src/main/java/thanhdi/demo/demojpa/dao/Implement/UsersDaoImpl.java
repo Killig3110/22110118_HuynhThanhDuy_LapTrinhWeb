@@ -2,6 +2,7 @@ package thanhdi.demo.demojpa.dao.Implement;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import thanhdi.demo.demojpa.dao.IUsersDao;
 import thanhdi.demo.demojpa.entities.Category;
@@ -112,16 +113,24 @@ public class UsersDaoImpl implements IUsersDao {
     public boolean checkExistEmails(String email) {
         EntityManager enma = JPAConfig.getEntityManager();
         TypedQuery<User> query = enma.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-        List<User> users = query.getResultList();
-        return users.size() > 0;
+        query.setParameter("email", email);
+        try {
+            return query.getSingleResult() != null ? true : false;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 
     @Override
     public boolean checkExistPhones(String phone) {
         EntityManager enma = JPAConfig.getEntityManager();
         TypedQuery<User> query = enma.createQuery("SELECT u FROM User u WHERE u.phone = :phone", User.class);
-        List<User> users = query.getResultList();
-        return users.size() > 0;
+        query.setParameter("phone", phone);
+        try {
+            return query.getSingleResult() != null ? true : false;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 
     @Override
@@ -130,7 +139,7 @@ public class UsersDaoImpl implements IUsersDao {
         EntityTransaction trans = enma.getTransaction();
         try{
             trans.begin();
-            User user = enma.find(User.class, username);
+            User user = findByUsernames(username);
             if (user != null) {
                 user.setPassword(password);
                 enma.merge(user);
@@ -153,7 +162,7 @@ public class UsersDaoImpl implements IUsersDao {
         EntityTransaction trans = enma.getTransaction();
         try {
             trans.begin();
-            User user = enma.find(User.class, username);
+            User user = findByUsernames(username);
             if (user != null) {
                 user.setFullname(fullname);
                 user.setPhone(phone);
@@ -175,8 +184,9 @@ public class UsersDaoImpl implements IUsersDao {
     public User getUserByFullName(String fullname) {
         EntityManager enma = JPAConfig.getEntityManager();
         TypedQuery<User> query = enma.createQuery("SELECT u FROM User u WHERE u.fullname = :fullname", User.class);
-        List<User> users = query.getResultList();
-        return users.size() > 0 ? users.get(0) : null;
+        query.setParameter("fullname", fullname);
+        User user = query.getSingleResult();
+        return user;
     }
 
     @Override
@@ -196,9 +206,7 @@ public class UsersDaoImpl implements IUsersDao {
 
     public static void main(String[] args) {
         UsersDaoImpl usersDao = new UsersDaoImpl();
-        List<User> users = usersDao.findAll();
-        for (User user : users) {
-            System.out.println(user);
-        }
+
+        usersDao.updateAccount("user2", "haha", "0022442244");
     }
 }

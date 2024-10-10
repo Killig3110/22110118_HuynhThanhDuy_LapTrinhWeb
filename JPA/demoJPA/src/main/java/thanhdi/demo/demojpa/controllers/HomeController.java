@@ -18,7 +18,7 @@ import java.io.IOException;
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        init();
+        initData();
         request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
     }
 
@@ -30,35 +30,26 @@ public class HomeController extends HttpServlet {
 
     }
 
-    public void init() {
+    public void initData() {
         EntityManager enma = JPAConfig.getEntityManager();
-        EntityTransaction trans = enma.getTransaction();
-        try {
-            trans.begin();
+        // check table "roles" have data
+        enma.getTransaction().begin();
+        TypedQuery<Role> query = enma.createQuery("SELECT r FROM Role r", Role.class);
+        long count = query.getResultList().size();
+        if (count == 0) {
+            enma.persist(new Role(1, "admin"));
+            enma.persist(new Role(2, "user"));
 
-            // check table "roles" have data
-            TypedQuery<Long> query = enma.createQuery("SELECT COUNT(r) FROM Role r", Long.class);
-            Long count = query.getSingleResult();
-            if (count == 0) {
-                enma.persist(new Role("admin"));
-                enma.persist(new Role("user"));
+            enma.persist(new User("thanhdi", "1234", "thanhdi.png", "Thanh Duy", "thanhdi@gmail.com", "0123456789", 1, "2024-10-05"));
+            enma.persist(new User("user1", "1234", "user1.png", "User", "user1@gmail.com", "0022446688", 2, "2024-10-05"));
 
-                enma.persist(new User("thanhdi", "1234", "thanhdi.png", "Thanh Duy", "thanhdi@gmail.com", "0123456789", 1, "2024-10-05"));
-                enma.persist(new User("user1", "1234", "user1.png", "User", "user1@gmail.com", "0022446688", 2, "2024-10-05"));
-
-                enma.persist(new Category("Music", "music.png", 1));
-                enma.persist(new Category("Sport", "sport.png", 1));
-                enma.persist(new Category("Game", "game.png", 1));
-            }
-
-            trans.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            trans.rollback();
-            throw e;
-        } finally {
-            enma.close();
+            enma.persist(new Category("Music", "music.png", 1));
+            enma.persist(new Category("Sport", "sport.png", 1));
+            enma.persist(new Category("Game", "game.png", 1));
         }
+        System.out.println("Init data success");
+        enma.getTransaction().commit();
+        enma.close();
 
     }
 }
