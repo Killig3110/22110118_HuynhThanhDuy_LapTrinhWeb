@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: killi
-  Date: 9/26/2024
-  Time: 2:06 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -35,8 +28,8 @@
       <td><img height="150" width="200" src="${imgUrl}" /></td>
       <td>${cate.categoryname}</td>
       <td>${cate.status}</td>
-      <td><a href="<c:url value='/admin/category/edit?id=${cate.categoryId}'/>">Sửa</a>
-        | <a href="<c:url value='/admin/category/delete?id=${cate.categoryId}'/>" >Xóa</a>
+      <td><a href="<c:url value='/admin/category/edit?id=${cate.categoryid}'/>">Sửa</a>
+        | <a href="<c:url value='/admin/category/delete?id=${cate.categoryid}'/>" >Xóa</a>
       </td>
     </tr>
   </c:forEach>

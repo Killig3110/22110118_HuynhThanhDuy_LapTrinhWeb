@@ -8,6 +8,7 @@
     <class>thanhdi.demo.demojpa.entities.Role</class>
     <class>thanhdi.demo.demojpa.entities.User</class>
     <class>thanhdi.demo.demojpa.entities.Category</class>
+    <class>thanhdi.demo.demojpa.entities.Video</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:mysql://localhost:3306/jpademo?createDatabaseIfNotExist=true"/>

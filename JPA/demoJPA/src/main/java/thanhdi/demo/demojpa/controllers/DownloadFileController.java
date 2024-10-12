@@ -14,16 +14,28 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-@WebServlet(name = "DownloadFileController", value = "/images")
+@WebServlet(name = "DownloadFileController", value = {"/images", "/videos"})
 public class DownloadFileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String fileName = req.getParameter("fname");
-        File file = new File(DIR + "/" + fileName);
-        resp.setContentType("images/jpeg");
-        if (file.exists()) {
-            IOUtils.copy(new FileInputStream(file), resp.getOutputStream());
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        String url = req.getRequestURI();
+
+        if (url.contains("/images")) {
+            File file = new File(DIR + "/" + fileName);
+            resp.setContentType("images/jpeg");
+            if (file.exists()) {
+                IOUtils.copy(new FileInputStream(file), resp.getOutputStream());
+            }
+        } else if (url.contains("/videos")) {
+            File file = new File(DIR + "/" + fileName);
+            resp.setContentType("video/mp4");
+            if (file.exists()) {
+                IOUtils.copy(new FileInputStream(file), resp.getOutputStream());
+            }
         }
     }
 }

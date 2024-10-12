@@ -8,6 +8,9 @@ import thanhdi.demo.demojpa.dao.IUsersDao;
 import thanhdi.demo.demojpa.entities.Category;
 import thanhdi.demo.demojpa.entities.User;
 import thanhdi.demo.demojpa.configs.JPAConfig;
+import thanhdi.demo.demojpa.entities.Video;
+import thanhdi.demo.demojpa.services.IVideoServices;
+import thanhdi.demo.demojpa.services.Implement.VideoServicesImpl;
 
 
 import java.sql.Connection;
@@ -205,8 +208,10 @@ public class UsersDaoImpl implements IUsersDao {
     }
 
     public static void main(String[] args) {
-        UsersDaoImpl usersDao = new UsersDaoImpl();
-
-        usersDao.updateAccount("user2", "haha", "0022442244");
+        IVideoServices videoServices = new VideoServicesImpl();
+        List<Video> listvideo = videoServices.findAll();
+        for (Video video : listvideo) {
+            System.out.println(video.getCategory().getCategoryname());
+        }
     }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,11 @@ public class Category implements Serializable {
     @Column(name = "categoryId")
     private int categoryid;
 
-    @Column(name = "categoryname", columnDefinition = "NVARCHAR(255)")
+    @Column(name = "categoryname", columnDefinition = "NVARCHAR(255) NOT NULL")
+    @NotEmpty(message = "Category name is required")
     private String categoryname;
 
-    @Column(name = "images", columnDefinition = "NVARCHAR(500)")
+    @Column(name = "images", columnDefinition = "NVARCHAR(500) null")
     private String images;
 
     @Column(name = "status")
@@ -35,5 +37,20 @@ public class Category implements Serializable {
         this.categoryname = categoryname;
         this.images = images;
         this.status = status;
+    }
+
+    @OneToMany(mappedBy = "category")
+    private List<Video> videos;
+
+    public Video addVideo(Video video) {
+        getVideos().add(video);
+        video.setCategory(this);
+        return video;
+    }
+    
+    public Video removeVideo(Video video) {
+        getVideos().remove(video);
+        video.setCategory(null);
+        return video;
     }
 }

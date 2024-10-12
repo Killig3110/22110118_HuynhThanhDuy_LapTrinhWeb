@@ -34,7 +34,7 @@ public class User implements Serializable{
     @NotEmpty(message = "Email should not be empty")
     private String email;
 
-    @Column(name = "roleid", nullable = false)
+    @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     private int roleid;
 
     @Column(name = "fullname", length = 100, nullable = true)

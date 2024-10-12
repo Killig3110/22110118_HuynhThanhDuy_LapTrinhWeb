@@ -17,9 +17,14 @@ import lombok.NoArgsConstructor;
 public class Role implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roleid")
     private int roleid;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
+
+    public Role(String name) {
+        this.name = name;
+    }
 }
