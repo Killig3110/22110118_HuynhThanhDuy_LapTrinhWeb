@@ -19,4 +19,6 @@ Bài tập tuần 5:
     1. Thự hiện cấu hình Sitemesh Decorator 3 với Template Bootstrap.
     
     2. Làm chức năng profile để update: fullname, phone, images (có sử dụng upload file)
+
+Bài tập CRUD và JPA
     
